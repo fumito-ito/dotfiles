@@ -1,0 +1,38 @@
+# 時刻を表示させる
+alias history='history -E'
+# L で less
+alias -g L='| less'
+# G で grep
+alias -g G='| grep'
+
+# cdコマンド実行後、lsを実行する
+function cd() {
+  builtin cd $@ && ls;
+}
+
+# gitignore.io
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+# hub
+
+# 適当なフォーマットに従って課題を表示する
+function hub-issues() { hub issue -f "%sC%i%Creset %t, by @%au assigned to @%as %sC[%Mt]%Creset%n" | peco ; }
+
+# ghi
+
+function show_open_issues_on_web() {
+  ghi show -w $(ghi list --filter 'all'| peco)
+}
+alias ghi-issues=show_open_issues_on_web
+
+# venv
+
+function activate_venv() {
+  . ~/pyenv/bin/activate
+}
+alias pyenv=activate_venv
+
+function deactivate_venv() {
+  deactivate
+}
+alias pyenv-end=deactivate_venv
